@@ -1,0 +1,16 @@
+- name: SignUp
+  link: /signup/
+  new_window: false
+  highlight: false
+- name: Login
+  link: /login/
+  new_window: false
+  highlight: false
+- name: MyAccount
+  link: /account/
+  new_window: false
+  highlight: false
+- name: Logout
+  link: #
+  new_window: false
+  highlight: false

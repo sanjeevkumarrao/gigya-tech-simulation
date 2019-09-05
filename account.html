@@ -1,0 +1,49 @@
+---
+title: My Account
+description: Click on your name to edit your profile.
+---
+
+<ul class="staff">
+		<li>
+			<div class="square-image"><img id="profileImg" src="/images/user.png" alt="profile image"/></div>
+			<div class="name"><a href="/profile" id="fullname">{{ person.name }}</a></div>
+			<div class="position" id="email">{{ person.position }}</div>
+
+		</li>
+</ul>
+<div  class="container">
+	<p class="subtext"> The below table shows the number of logins from each provider. </p>
+	<div class="plans" id="count">
+	</div>
+</div>
+
+<script>
+	$(function() {
+  	console.log("my account page loaded");
+		var user = JSON.parse(sessionStorage.getItem("user"));
+		if( user != undefined || user != null){
+			$("#myaccountLink").removeClass("hide").addClass("show");
+		  $("#logoutLink").removeClass("hide").addClass("show");
+		  $("#loginLink").removeClass("show").addClass("hide");
+		  $("#signupLink").removeClass("show").addClass("hide");
+			$("#profileImg").attr("src", user.photoURL);
+			$("#fullname").text(user.firstName+ " "+ user.lastName);
+			$("#email").text(user.email);
+
+			var template = '';
+			var loginCount = JSON.parse(localStorage.getItem("loginCount"));
+
+			if(loginCount != null || loginCount != "undefined"){
+				for (i=0; i<loginCount.length;i++) {
+  				template += '<ul class="plan"> <li style="background: #4a4a4a"><h3>'+loginCount[i].provider.toUpperCase()+'</h3></li><li>'+loginCount[i].count+'</li></ul>';
+				}
+			}
+
+			$('#count').html(template);
+
+		}else{
+			window.location.href='/';
+		}
+
+	});
+</script>
